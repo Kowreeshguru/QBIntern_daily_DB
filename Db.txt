@@ -1,0 +1,71 @@
+update employee 
+set designation ='Dveloper'
+where emp_name ='kow'
+
+delete from employee 
+where emp_id = '117'
+
+
+create table retailer(
+	id int primary key,
+	retailer_id varchar(5) not null,
+	retailer_name varchar(20) not null,
+	email varchar(30) not null
+)
+
+
+create table wholesaler(
+	id int primary key,
+	wholesaler_id varchar(5) not null,
+	wholesaler_name varchar(20) not null,
+	email varchar(30) not null
+)
+
+
+create table product(
+	id int primary key,
+	productId int not null,
+	productName varchar(50) not null,
+	stock int not null,
+	price int not null
+)
+
+create table wholesaler_inventory(
+	id int primary key not null,
+	wholesalerId int not null,
+	productId int not null
+	quantity int not null,
+	price int not null,
+	constraint fk1 foreign key (wholesalerId) references wholesaler(id),
+	constraint fk2 foreign key (productId) references product(id)
+)
+
+create table retailer_inventory(
+	id int primary key not null,
+	retailerId int not null,
+	wholesalerId int not null,
+	productId int not null
+	quantity int not null,
+	price int not null,
+	constraint fk1 foreign key (retailerId) references retailer(id),
+	constraint fk2 foreign key (wholesalerId) references wholesaler(id),
+	constraint fk3 foreign key (productId) references product(id)
+)
+
+
+drop table product;
+
+insert into retailer (id, retailer_id, retailer_name, email)
+values
+(1,'r01', 'ruthsan', 'ruthsan@gmail.com'),
+(2,'r02', 'kowreesh', 'kowreesh@gmail.com')
+
+insert into wholesaler (id, wholesaler_id, wholesaler_name, email)
+values
+(1,'w01', 'coimbatore', 'cbe@gmail.com'),
+(2,'w02', 'chennai', 'chennai@gmail.com')
+
+insert into product(id, productId,productName,stock,price) values
+(1,p01,product1,100,10),
+(2,p02,product2,100,10),
+(3,p03,product3,100,10)
